@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karsa Kafe — kafe — Ubud</title>
+  <meta name="description" content="Nikmati suasana santai dan ramah di Karsa Kafe, Ubud. Kopi Bali terbaik dan hidangan lezat menanti Anda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #F9A826;
+      --secondary: #3B6C4C;
+      --background: #FFF8F1;
+      --text: #3A2C1A;
+      --cta: #E4572E;
+      --font-heading: 'Quicksand', sans-serif;
+      --font-body: 'Merriweather', serif;
+      --radius: 12px;
+      --spacing: 96px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,248,241,0.97);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(58,44,26,0.08);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--primary); }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--background);
+      z-index: 99;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(58,44,26,0.1);
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+      .nav-links { display: flex; }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background: url('https://26563919.fs1.hubspotusercontent-eu1.net/hubfs/26563919/default_image.png') center/cover no-repeat;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+
+    .hero-img-badge {
+      position: absolute;
+      bottom: 80px;
+      left: 20px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    @media (min-width: 480px) {
+      .hero-buttons { flex-direction: row; justify-content: center; }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--cta);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(228,87,46,0.35);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 2px solid #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-secondary:hover {
+      background: #fff;
+      color: var(--text);
+    }
+
+    @media (min-width: 480px) {
+      .btn-primary, .btn-secondary { width: auto; }
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 48px 16px;
+    }
+
+    @media (min-width: 768px) {
+      section { padding: var(--spacing) 40px; }
+    }
+
+    @media (min-width: 1024px) {
+      section { padding: var(--spacing) 80px; }
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--secondary);
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin: 12px auto 0;
+    }
+
+    /* ABOUT */
+    .about-section { background: #fff; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .about-text h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    .about-image {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    .img-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: var(--radius);
+    }
+
+    /* MENU */
+    .menu-section { background: var(--background); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .menu-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .menu-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(58,44,26,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(58,44,26,0.12);
+    }
+
+    .menu-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .menu-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .menu-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* REVIEWS */
+    .reviews-section { background: var(--secondary); }
+
+    .reviews-section .section-title { color: #fff; }
+    .reviews-section .section-title::after { background: var(--primary); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .review-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .review-stars {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .review-author {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--secondary);
+      font-size: 0.95rem;
+    }
+
+    /* GALLERY */
+    .gallery-section { background: #fff; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-caption {
+      text-align: center;
+      font-family: var(--font-heading);
+      color: var(--text);
+      margin-top: 24px;
+      font-size: 1rem;
+    }
+
+    /* HOURS & LOCATION */
+    .hours-section { background: var(--background); }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .hours-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .hours-table {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(58,44,26,0.07);
+    }
+
+    .hours-table h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(58,44,26,0.08);
+      font-size: 0.95rem;
+    }
+
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-day { font-family: var(--font-heading); font-weight: 600; }
+    .hours-time { color: var(--secondary); font-weight: 600; }
+
+    .contact-info {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(58,44,26,0.07);
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .contact-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 20px;
+      height: 220px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* CONTACT FORM */
+    .contact-section { background: #fff; }
+
+    .contact-form-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-instruction {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 36px;
+      color: var(--text);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid rgba(58,44,26,0.15);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--background);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .form-group textarea { min-height: 130px; resize: vertical; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--cta);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(228,87,46,0.3);
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, #f0861a 100%);
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.05rem;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .cta-section .btn-primary {
+      background: #fff;
+      color: var(--cta);
+      display: inline-block;
+      width: auto;
+    }
+
+    .cta-section .btn-primary:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.85);
+      padding: 48px 24px 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .footer-brand .logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      font-size: 1rem;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+    }
+
+    .footer-col a:hover { color: var(--primary); }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      margin-top: 12px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* WL:OVERLAY:START */
+    #urgency-banner{position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#48DCB1;color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;font-family:var(--font-heading)}
+    #urgency-banner>*{text-align:center}
+    #urgency-banner .ub-cta{background:#FC814A;color:#fff;font-family:var(--font-heading);font-weight:600;padding:8px 18px;border-radius:var(--radius);border:none;cursor:pointer;white-space:nowrap}
+    #purchase-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9999;align-items:center;justify-content:center}
+    #purchase-modal .pm-card{background:#fff;border-radius:var(--radius);padding:32px;max-width:420px;width:90%;position:relative;animation:fadeIn .2s}
+    #purchase-modal .pm-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#888;font-size:1.4rem;cursor:pointer}
+    #purchase-modal .pm-title{font-family:var(--font-heading);font-size:1.3rem;font-weight:700;color:var(--primary);margin-bottom:12px}
+    #purchase-modal .pm-body{font-family:var(--font-body);font-size:0.95rem;margin-bottom:24px;color:var(--text)}
+    #modal-cta-buy{display:block;width:100%;padding:14px;background:var(--cta);color:#fff;border:none;border-radius:var(--radius);font-family:var(--font-heading);font-weight:700;cursor:pointer;margin-bottom:10px;font-size:1rem}
+    #modal-cta-sales{display:block;width:100%;padding:12px;background:transparent;border:2px solid var(--primary);color:var(--primary);border-radius:var(--radius);font-family:var(--font-heading);font-weight:600;text-align:center;text-decoration:none;font-size:0.95rem}
+    .wl-hero-cta{display:inline-block;margin-top:16px;color:rgba(255,255,255,0.80);font-family:var(--font-heading);font-weight:600;font-size:0.88rem;cursor:pointer;text-decoration:none;border-bottom:1px solid transparent}
+    .wl-hero-cta:hover{border-bottom-color:rgba(255,255,255,0.80)}
+    body{padding-bottom:60px}
+    /* WL:OVERLAY:END */
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Karsa <span>Kafe</span></a>
+    <ul class="nav-links">
+      <li><a href="#tentang-kafe">Tentang</a></li>
+      <li><a href="#menu-unggulan">Menu</a></li>
+      <li><a href="#testimoni-pelanggan">Ulasan</a></li>
+      <li><a href="#galeri-foto">Galeri</a></li>
+      <li><a href="#lokasi-dan-jam-buka">Lokasi</a></li>
+      <li><a href="#ajakan-bergabung">Hubungi</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#tentang-kafe" onclick="closeMobileMenu()">Tentang</a></li>
+      <li><a href="#menu-unggulan" onclick="closeMobileMenu()">Menu</a></li>
+      <li><a href="#testimoni-pelanggan" onclick="closeMobileMenu()">Ulasan</a></li>
+      <li><a href="#galeri-foto" onclick="closeMobileMenu()">Galeri</a></li>
+      <li><a href="#lokasi-dan-jam-buka" onclick="closeMobileMenu()">Lokasi</a></li>
+      <li><a href="#ajakan-bergabung" onclick="closeMobileMenu()">Hubungi</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" style="padding-top: 64px;">
+    <div class="hero-img-badge">📸 Gambar bisnis Anda di sini</div>
+    <div class="hero-content">
+      <h1>Nikmati Kopi Bali Terbaik</h1>
+      <p>Santai di Karsa Kafe dengan pemandangan sawah yang menenangkan.</p>
+      <div class="hero-buttons">
+        <a href="#ajakan-bergabung" class="btn-primary">Pesan Sekarang</a>
+        <a href="#menu-unggulan" class="btn-secondary">Lihat Menu</a>
+      </div>
+      <!-- WL:OVERLAY:START -->
+      <span class="wl-hero-cta" onclick="window.showModal()" id="hero-cta-link"></span>
+      <!-- WL:OVERLAY:END -->
+    </div>
+  </section>
+
+  <!-- TENTANG KAFE -->
+  <section class="about-section fade-in" id="tentang-kafe">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Tentang Karsa Kafe</h2>
+        <p>Karsa Kafe adalah tempat yang sempurna untuk menikmati suasana santai dan ramah di Ubud. Dengan pilihan kopi Bali yang lezat dan hidangan lokal yang menggugah selera, kafe kami menawarkan pengalaman bersantap yang tak terlupakan. Kami juga menyediakan berbagai pilihan vegan dan vegetarian, serta minuman beralkohol seperti bir dan koktail. Nikmati momen santai Anda di area duduk luar ruangan kami yang trendi dan romantis.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://26563919.fs1.hubspotusercontent-eu1.net/hubfs/26563919/default_image.png" alt="Tentang Karsa Kafe">
+        <div class="img-badge">📸 Gambar bisnis Anda di sini</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU UNGGULAN -->
+  <section class="menu-section fade-in" id="menu-unggulan">
+    <h2 class="section-title">Menu Unggulan Kami</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-icon">☕</div>
+        <h3>Kopi Bali</h3>
+        <p>Nikmati cita rasa autentik kopi Bali yang kaya.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">🍛</div>
+        <h3>Hidangan Lokal</h3>
+        <p>Rasakan kelezatan hidangan lokal yang menggugah selera.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">🥗</div>
+        <h3>Pilihan Vegan</h3>
+        <p>Menu sehat dengan pilihan vegan yang lezat.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">🍮</div>
+        <h3>Dessert Istimewa</h3>
+        <p>Akhiri santapan Anda dengan dessert yang memanjakan lidah.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI PELANGGAN -->
+  <section class="reviews-section fade-in" id="testimoni-pelanggan">
+    <h2 class="section-title">Apa Kata Pelanggan Kami</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Setelah berjalan jauh dari pusat Ubud, sungguh melegakan bisa duduk di taman yang tenang sambil memandang sawah. Makanan lokal yang enak, buah-buahan segar, dan bir dingin, persis seperti yang Anda..."</p>
+        <div class="review-author">— Alexandre NAHAN</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Tempat yang sangat bagus, terutama setelah mendaki. Saya sarankan untuk duduk di salah satu area pribadi untuk mengagumi sawah sambil menikmati hidangan lezat."</p>
+        <div class="review-author">— Gus Mames</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI FOTO -->
+  <section class="gallery-section fade-in" id="galeri-foto">
+    <h2 class="section-title">Galeri Foto</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://26563919.fs1.hubspotusercontent-eu1.net/hubfs/26563919/default_image.png" alt="Galeri Karsa Kafe 1">
+        <div class="img-badge">📸 Gambar bisnis Anda di sini</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://26563919.fs1.hubspotusercontent-eu1.net/hubfs/26563919/default_image.png" alt="Galeri Karsa Kafe 2">
+        <div class="img-badge">📸 Gambar bisnis Anda di sini</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://26563919.fs1.hubspotusercontent-eu1.net/hubfs/26563919/default_image.png" alt="Galeri Karsa Kafe 3">
+        <div class="img-badge">📸 Gambar bisnis Anda di sini</div>
+      </div>
+    </div>
+    <p class="gallery-caption">Lihat momen indah di Karsa Kafe.</p>
+  </section>
+
+  <!-- LOKASI DAN JAM BUKA -->
+  <section class="hours-section fade-in" id="lokasi-dan-jam-buka">
+    <h2 class="section-title">Lokasi dan Jam Buka</h2>
+    <div class="hours-grid">
+      <div class="hours-table">
+        <h3>🕐 Jam Operasional</h3>
+        <div class="hours-row"><span class="hours-day">Senin</span><span class="hours-time">8AM – 7:30PM</span></div>
+        <div class="hours-row"><span class="hours-day">Selasa</span><span class="hours-time">8AM – 7:30PM</span></div>
+        <div class="hours-row"><span class="hours-day">Rabu</span><span class="hours-time">8AM – 7:30PM</span></div>
+        <div class="hours-row"><span class="hours-day">Kamis</span><span class="hours-time">8AM – 7:30PM</span></div>
+        <div class="hours-row"><span class="hours-day">Jumat</span><span class="hours-time">8AM – 7:30PM</span></div>
+        <div class="hours-row"><span class="hours-day">Sabtu</span><span class="hours-time">8AM – 7:30PM</span></div>
+        <div class="hours-row"><span class="hours-day">Minggu</span><span class="hours-time">8AM – 7:30PM</span></div>
+      </div>
+      <div class="contact-info">
+        <h3>📍 Informasi Kontak</h3>
+        <div class="contact-item">
+          <span class="contact-icon">📌</span>
+          <span>Keliki, Jl. Bangkiang Sidem 80571 Gianyar Regency Indonesia</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📞</span>
+          <a href="tel:+62817344658">+62 817-344-658</a>
+        </div>
+        <div class="map-container">
+          <iframe src="https://maps.google.com/maps?q=-8.4896843,115.2582892&z=16&output=embed" allowfullscreen loading="lazy" title="Peta Karsa Kafe"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AJAKAN BERGABUNG / CONTACT FORM -->
+  <section class="contact-section fade-in" id="ajakan-bergabung">
+    <h2 class="section-title">Hubungi Kami</h2>
+    <div class="contact-form-wrap">
+      <p class="contact-instruction">Untuk informasi lebih lanjut, silakan hubungi kami melalui telepon atau kunjungi lokasi kami.</p>
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Nama Lengkap</label>
+          <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Nomor Telepon</label>
+          <input type="tel" id="phone" name="phone" placeholder="Masukkan nomor telepon Anda">
+        </div>
+        <div class="form-group">
+          <label for="message">Pesan</label>
+          <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Kirim Pesan</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section fade-in">
+    <h2>Kunjungi Kami Hari Ini</h2>
+    <p>Rasakan pengalaman bersantap yang tak terlupakan di Karsa Kafe, Ubud.</p>
+    <a href="tel:+62817344658" class="btn-primary">Hubungi Kami</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Karsa Kafe</div>
+        <p>Kafe terbaik di Ubud dengan suasana santai dan pemandangan sawah yang memukau.</p>
+        <div class="rating-badge">★ 4.2 (1297 ulasan)</div>
+      </div>
+      <div class="footer-col">
+        <h4>Informasi</h4>
+        <p>Keliki, Jl. Bangkiang Sidem 80571<br>Gianyar Regency, Indonesia</p>
+        <p style="margin-top:10px;"><a href="tel:+62817344658">+62 817-344-658</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Jam Buka</h4>
+        <p>Senin – Minggu<br>08:00 – 19:30</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Karsa Kafe. Semua hak dilindungi.</p>
+    </div>
+  </footer>
+
+  <!-- WL:OVERLAY:START -->
+  <div id="urgency-banner">
+    <span id="ub-text"></span>
+    <span id="countdown" style="font-weight:700;letter-spacing:0.04em"></span>
+    <button class="ub-cta" onclick="window.showModal()" id="ub-cta-btn"></button>
+  </div>
+  <!-- WL:OVERLAY:END -->
+
+  <!-- WL:OVERLAY:START -->
+  <div id="purchase-modal">
+    <div class="pm-card">
+      <button class="pm-close" onclick="hideModal()">×</button>
+      <div class="pm-title" id="pm-title"></div>
+      <div class="pm-body" id="pm-body"></div>
+      <button id="modal-cta-buy"></button>
+      <a id="modal-cta-sales" href="mailto:team@kamkod.com?subject=Website%20Karsa%20Kafe%20%E2%80%94%20ChIJy5jtwzU90i0Rb1TTu4V3vgE" target="_blank"></a>
+    </div>
+  </div>
+  <!-- WL:OVERLAY:END -->
+
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+    }
+
+    // Intersection Observer for fade-in
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // WL:OVERLAY:START
+    (function(){
+      const LANG = 'id';
+      const PLACE_ID = 'ChIJy5jtwzU90i0Rb1TTu4V3vgE';
+      const EXPIRY = 1778578388;
+      const HOOK = 'https://hook.eu1.make.com/jw5r2h7rgemanpjuplbn6qkvu68eh2dl';
+
+      const i18n = {
+        id: {
+          ub_text: 'Situs ini akan kedaluwarsa dalam',
+          ub_cta: 'Dapatkan Situs Ini',
+          pm_title: 'Situs Ini Tersedia untuk Dibeli',
+          pm_body: 'Formulir kontak akan aktif setelah pembelian. Miliki situs profesional ini sekarang.',
+          cta_buy: 'Saya Ingin Situs Ini',
+          cta_sales: 'Bicara dengan Tim Kami',
+          hero_cta: 'Situs ini tersedia — klik untuk info',
+        },
+        fr: {
+          ub_text: 'Ce site expire dans',
+          ub_cta: 'Obtenir ce site',
+          pm_title: 'Ce site est disponible à l\'achat',
+          pm_body: 'Le formulaire de contact sera activé après l\'achat. Publiez ce site professionnel dès maintenant.',
+          cta_buy: 'Je veux ce site',
+          cta_sales: 'Parler à notre équipe',
+          hero_cta: 'Ce site est disponible — cliquez pour en savoir plus',
+        },
+        en: {
+          ub_text: 'This site expires in',
+          ub_cta: 'Get This Website',
+          pm_title: 'This Website Is Available',
+          pm_body: 'The contact form activates after purchase. Get your professional website live now.',
+          cta_buy: 'I Want This Website',
+          cta_sales: 'Talk to Sales',
+          hero_cta: 'This website is available for purchase',
+        }
+      };
+      const t = i18n[LANG] || i18n['en'];
+
+      const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+      set('ub-text', t.ub_text);
+      set('ub-cta-btn', t.ub_cta);
+      set('pm-title', t.pm_title);
+      set('pm-body', t.pm_body);
+      set('modal-cta-buy', t.cta_buy);
+      set('modal-cta-sales', t.cta_sales);
+      set('hero-cta-link', t.hero_cta);
+
+      function updateCountdown(){
+        const diff = Math.max(0, EXPIRY - Math.floor(Date.now()/1000));
+        const d=Math.floor(diff/86400),h=Math.floor((diff%86400)/3600),
+              m=Math.floor((diff%3600)/60),s=diff%60;
+        const el=document.getElementById('countdown');
+        if(el) el.textContent=String(d).padStart(2,'0')+'d '
+          +String(h).padStart(2,'0')+'h '
+          +String(m).padStart(2,'0')+'m '
+          +String(s).padStart(2,'0')+'s';
+        setTimeout(updateCountdown,1000);
+      }
+      updateCountdown();
+
+      window.showModal = function(){
+        document.getElementById('purchase-modal').style.display='flex';
+      };
+      function hideModal(){
+        document.getElementById('purchase-modal').style.display='none';
+        const b=document.getElementById('modal-cta-buy');
+        if(b){b.disabled=false;b.style.opacity='1';}
+      }
+      window.hideModal = hideModal;
+
+      const modal = document.getElementById('purchase-modal');
+      if(modal) modal.addEventListener('click', e=>{ if(e.target===modal) hideModal(); });
+
+      const buyBtn = document.getElementById('modal-cta-buy');
+      if(buyBtn) buyBtn.addEventListener('click', ()=>{
+        window.open(HOOK+'?event=render_purchase_page&place_id='+PLACE_ID,'_blank');
+      });
+
+      document.querySelectorAll('form').forEach(f=>{
+        f.addEventListener('submit', e=>{ e.preventDefault(); window.showModal(); });
+      });
+    })();
+    // WL:OVERLAY:END
+  </script>
+
+  <script>
+    // WL:OVERLAY:START
+    (function(){
+      const sid=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>
+        (c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
+      function track(t){
+        try{fetch('https://hook.eu1.make.com/gon2a3yj5xjuidxlvh8i8zxno0qo54qn',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({place_id:'ChIJy5jtwzU90i0Rb1TTu4V3vgE',
+            event_type:t,session_id:sid,
+            timestamp:Math.floor(Date.now()/1000),
+            referrer:document.referrer||'direct',
+            user_agent:navigator.userAgent,language:navigator.language})
+        });}catch(e){}
+      }
+      track('visit');
+      const orig=window.showModal;
+      if(typeof orig==='function'){
+        window.showModal=function(){track('modal_open');orig.apply(this,arguments);};
+      }
+    })();
+    // WL:OVERLAY:END
+  </script>
+
+</body>
+</html>
